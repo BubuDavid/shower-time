@@ -11,7 +11,9 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { LoginButton } from "./_components/login-button"
 
-function LoginPage() {
+async function LoginPage(request) {
+  const expired = request.searchParams.expired || false
+
   return (
     <div className="w-full flex justify-center">
       <Card className="w-[500px] min-h-96 text-center relative from-[#121212] to-primary-foreground bg-gradient-to-b">
@@ -20,10 +22,15 @@ function LoginPage() {
           <CardDescription>Inicia sesión con Spotify</CardDescription>
           <Separator className="my-4 w-full" />
         </CardHeader>
-        <CardContent className="flex items-center justify-center h-52">
+        <CardContent className="flex items-center justify-center h-52 flex-col">
           <LoginButton icon={true} />
+          {expired && (
+            <div className="text-xs font-light text-red-600 mt-3">
+              Tu sesión ha expirado, vuelve a iniciar sesión.
+            </div>
+          )}
         </CardContent>
-        <CardFooter className="absolute bottom-2">
+        <CardFooter className="absolute bottom-2 flex-col items-center justify-center">
           <span className="text-xs font-light">
             Lee nuestros{" "}
             <Link href="/terms" className="underline">

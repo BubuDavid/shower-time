@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils"
 
 export const OptionButton = ({ optionParams, className }) => {
   const { title, content, gradient, href } = optionParams
-  console.log({ className })
   return (
     <Link href={href} className={cn("", className)}>
       <Card className="w-full min-h-[200px] pb-4 md:min-w-[400px] md:min-h-[300px] transition-all relative overflow-hidden cursor-pointer">

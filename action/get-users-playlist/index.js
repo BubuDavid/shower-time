@@ -1,30 +1,27 @@
 "use  server"
 
 import { auth } from "@/lib/auth"
-
-export const getUserPlaylists = async (accessToken) => {
+import { redirect } from "next/navigation"
+export const getUserPlaylists = async () => {
   const session = await auth()
   if (!session) {
-    return {
-      statusCode: 401,
-      error: "Unauthorized, maybe the token is invalid or expired",
-    }
+    redirect("/login?expired=true")
   }
 
   const token = session.accessToken
 
   const response = await fetch(
-    "https://api.spotify.com/v1/me/playlists?limit=1",
+    "https://api.spotify.com/v1/me/playlists?limit=10",
     {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       method: "GET",
-      cache: "no-store",
-      // next: {
-      //   revalidate: 60 * 10,
-      // },
+      // cache: "no-store",
+      next: {
+        revalidate: 60 * 10,
+      },
     },
   )
 

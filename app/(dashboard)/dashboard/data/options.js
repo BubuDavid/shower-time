@@ -41,4 +41,5 @@ export const optionCards = [
     ),
     href: "/dashboard/recommendation",
   },
+  // Remember that if you are going to add a new option with dynamic gradients, you need to add the gradient to the safelist in the tailwind.config.js
 ]

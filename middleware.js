@@ -13,6 +13,7 @@ export default auth((req) => {
   const isAapiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  const isLogOutRoute = nextUrl.pathname === "/account/logout"
 
   if (isLoggedIn && isPublicRoute) {
     return Response.redirect(new URL(DEFAULT_REDIRECT, nextUrl))
@@ -31,6 +32,17 @@ export default auth((req) => {
 
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL("/login", nextUrl))
+  }
+
+  if (isLoggedIn && !isLogOutRoute) {
+    if (req.auth.expires) {
+      const expiration = new Date(req.auth.expires * 1000)
+      const now = new Date()
+      const isExpired = expiration < now
+      if (isExpired) {
+        return Response.redirect(new URL("/account/logout", nextUrl))
+      }
+    }
   }
 
   return null
