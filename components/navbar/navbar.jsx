@@ -10,7 +10,7 @@ import { LoginButton } from "@/app/(marketing)/login/_components/login-button"
 export const Navbar = ({ session }) => {
   const isLoggedIn = !!session
   return (
-    <div className="w-full shadow shadow-primary">
+    <div className="w-full shadow shadow-primary z-30 relative">
       <nav className="p-4 flex items-center justify-between max-w-screen-xl mx-auto md:h-20">
         <NavbarLogo />
         <MobileSidebar isLoggedIn={isLoggedIn} />

@@ -2,8 +2,9 @@ export const optionCards = [
   {
     tag: 1,
     gradient: ["#020202", "#161d29", "#263247"],
+    bgColor: "dark:bg-[#58A399]/[0.8]",
     title: "Sabes lo que quieres",
-    content: () => (
+    description: (
       <div>
         <p className="font-light mb-2 text-sm">
           Sigue los siguientes pasos si sabes lo que quieres escuchar.
@@ -18,13 +19,14 @@ export const optionCards = [
         </ol>
       </div>
     ),
-    href: "/dashboard/choose-music",
+    link: "/dashboard/choose-music",
   },
   {
     tag: 2,
     gradient: ["#020202", "#162916", "#264727"],
+    bgColor: "dark:bg-[#496989]/[0.8]",
     title: "No sabes que escuchar",
-    content: () => (
+    description: (
       <div>
         <p className="font-light mb-2 text-sm">
           Sigue los siguientes pasos si no sabes que quieres escuchar
@@ -39,7 +41,7 @@ export const optionCards = [
         </ol>
       </div>
     ),
-    href: "/dashboard/recommendation",
+    link: "/dashboard/recommendation",
   },
   // Remember that if you are going to add a new option with dynamic gradients, you need to add the gradient to the safelist in the tailwind.config.js
 ]

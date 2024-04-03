@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider"
 import { Navbar } from "@/components/navbar/navbar"
 
 import "./globals.css"
+import { ModeToggle } from "@/components/mode-toggler"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,16 +33,24 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={poppins.className}>
+      <body
+        className={cn(
+          "dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative",
+          poppins.className,
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
+          enableSystem
           disableTransitionOnChange
         >
+          <div className="absolute pointer-events-none h-screen inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
           <Navbar session={session} />
-          <main className="md:mt-20 mt-10 px-4 max-w-4xl 2xl:max-w-screen-xl mx-auto">
+          <main className="relative z-30 md:mt-20 mt-10 px-4 max-w-4xl 2xl:max-w-screen-xl mx-auto">
             {children}
           </main>
+          {/* <ModeToggle /> */}
         </ThemeProvider>
       </body>
     </html>
